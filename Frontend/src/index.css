@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* --- DARK THEME PALETTE --- */
+    --background: 222.2 84% 4.9%; /* Dark Slate */
+    --foreground: 210 40% 98%; /* Light Gray Text */
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 24 94% 52%; /* Saffron/Orange (Stays vibrant) */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 217.2 32.6% 17.5%; /* Slightly Lighter Dark Gray for sections */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%; /* Muted light gray text */
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 24 94% 52%; /* Saffron/Orange for focus rings */
+
+    --radius: 0.5rem;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    @apply antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* --- GLOBAL CURSOR POINTER STYLES --- */
+  button,
+  a,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  label[htmlFor],
+  select,
+  [tabindex]:not([tabindex="-1"]) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  /* Custom Hero Button Style (works well on dark theme) */
+  .btn-hero {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    @apply shadow-lg transition-all duration-300 transform hover:scale-105;
+    box-shadow: 0 0 15px 0 hsl(var(--primary) / 0.5),
+      0 0 5px 0 hsl(var(--primary) / 0.4);
+  }
+  .btn-hero:hover {
+    background-color: hsl(var(--primary) / 0.9);
+    box-shadow: 0 0 25px 0 hsl(var(--primary) / 0.6),
+      0 0 10px 0 hsl(var(--primary) / 0.5);
+  }
+
+  /* Custom Submit Button with Gradient */
+  .btn-submit {
+    /* Define the gradient directly using CSS variables and the theme() function */
+    background-image: linear-gradient(
+      to right,
+      hsl(var(--primary)),
+      theme("colors.orange.500"),
+      theme("colors.amber.500")
+    );
+
+    /* Apply other Tailwind utilities that ARE compatible */
+    @apply text-white font-semibold shadow-lg transition-all duration-300;
+  }
+  .btn-submit:hover {
+    @apply shadow-xl scale-105;
+    box-shadow: 0 0 20px 0 hsl(var(--primary) / 0.5);
+  }
+
+  /* Custom elegant shadow for cards */
+  .shadow-elegant {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+  .shadow-elegant-lg {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+}
