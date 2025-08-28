@@ -95,7 +95,7 @@ const Index = () => {
                   <Twitter />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/bharath_sp05?igsh=MWRhcHRzeW1ydGdsYQ=="
                   className="text-slate-400 hover:text-primary transition-colors"
                 >
                   <Instagram />
@@ -164,19 +164,19 @@ const Index = () => {
                   <p>
                     Phone:{" "}
                     <a
-                      href="tel:+910000000000"
+                      href="tel:+918978379001"
                       className="hover:text-primary transition-colors"
                     >
-                      +91-XXXXXXXXXX
+                      +91-8978379001
                     </a>
                   </p>
                   <p>
                     Email:{" "}
                     <a
-                      href="mailto:contact@example.com"
+                      href="mailto:spbharath2005@gmail.com"
                       className="hover:text-primary transition-colors"
                     >
-                      contact@example.com
+                      spbharath2005@gmail.com
                     </a>
                   </p>
                 </address>
