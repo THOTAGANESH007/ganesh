@@ -138,69 +138,70 @@ const CoordinatorsSection = () => {
         ) : coordinators.length > 0 ? (
           <>
             {/* Coordinators grid */}
-            <div className="mt-20 flex flex-wrap justify-center items-start gap-x-12 gap-y-16 md:gap-x-24">
+            <div className="mt-20 grid grid-cols-3 gap-x-4 gap-y-8 md:gap-x-8 md:gap-y-12">
               {coordinators.slice(0, 3).map((c, idx) => (
                 <motion.div
                   key={c._id}
-                  className="group relative flex flex-col items-center w-56 p-6 rounded-2xl bg-background shadow-sm border border-border transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-primary/30"
+                  className="group relative flex flex-col items-center text-center"
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
                 >
-                  <Avatar className="h-28 w-28 border-4 border-background shadow-lg transition-all duration-300 group-hover:ring-4 group-hover:ring-primary/40">
-                    <AvatarImage
-                      src={c?.photo?.url}
-                      alt={c?.photo?.alt || c?.name || "Coordinator"}
-                      className="object-cover"
-                    />
-                    <AvatarFallback className="text-3xl bg-secondary text-secondary-foreground">
-                      {initials(c?.name)}
-                    </AvatarFallback>
-                  </Avatar>
+                  <div className="relative">
+                    <Avatar className="h-24 w-24 md:h-28 md:w-28 shadow-lg transition-all duration-300 group-hover:ring-4 group-hover:ring-primary/40">
+                      <AvatarImage
+                        src={c?.photo?.url}
+                        alt={c?.photo?.alt || c?.name || "Coordinator"}
+                        className="object-cover"
+                      />
+                      <AvatarFallback className="text-2xl md:text-3xl bg-primary/10">
+                        {initials(c?.name)}
+                      </AvatarFallback>
+                    </Avatar>
 
-                  <div className="mt-4">
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {c?.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">Coordinator</p>
+                    {/* Delete button (Admin only) */}
+                    {isAdmin && (
+                      <div className="absolute -top-2 -right-2">
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button
+                              variant="destructive"
+                              size="icon"
+                              className="h-8 w-8 md:h-9 md:w-9 rounded-full opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                Delete this coordinator?
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This will permanently delete {c?.name} and their
+                                photo.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => handleDelete(c._id)}
+                              >
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Delete button (Admin only) */}
-                  {isAdmin && (
-                    <div className="absolute top-3 right-3">
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button
-                            variant="destructive"
-                            size="icon"
-                            className="h-9 w-9 rounded-full opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>
-                              Delete this coordinator?
-                            </AlertDialogTitle>
-                            <AlertDialogDescription>
-                              This will permanently delete {c?.name} and their
-                              photo.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction
-                              onClick={() => handleDelete(c._id)}
-                            >
-                              Delete
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </div>
-                  )}
+                  <div className="mt-3 md:mt-4 transition-transform duration-300 group-hover:scale-105">
+                    <h3 className="text-base md:text-lg font-semibold text-foreground">
+                      {c?.name}
+                    </h3>
+                  </div>
                 </motion.div>
               ))}
             </div>
