@@ -22,7 +22,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../components/ui/alert-dialog";
-import { Trash2, View, LoaderCircle, CalendarPlus } from "lucide-react";
+import {
+  Trash2,
+  View,
+  LoaderCircle,
+  CalendarPlus,
+  ArrowLeft,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AllEvents = () => {
